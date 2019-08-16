@@ -1,0 +1,12 @@
+looking at the docker file provided by the authors, it appears to just be the setup for a python environment, I'm doesn't look like it installs deeplabcut in the recipie file. 
+
+I'll try installing using the tensorflow recipie that justin created
+
+have to change the version of wxpython wheel to match both the os version (ubuntu 16.04) and the python version (3.5)
+Once that was fixed, the image built, but importing deeplabcut in python in the image throws a libgtk-3.so.0: cannot open shared object
+added apt-get installs for gtk3, build-essential, and python3-tk, which appear to have fixed those issues. 
+
+To run:
+on aci-i, with graphical interface:
+singularity run --nv deeplabcut_tensorflow.simg 
+import deeplabcut

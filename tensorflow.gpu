@@ -1,0 +1,43 @@
+# latest tensorflow_gpu for ICS-ACI
+
+BootStrap: docker
+From: tensorflow/tensorflow:1.13.1-gpu-py3
+
+%labels
+Author adp29
+
+%runscript
+    exec /usr/local/bin/python "$@"
+
+%post
+    #------------------------------------------------------------------------------
+    # Create local binding point for our HPC
+    #------------------------------------------------------------------------------
+    	mkdir -p /storage/home
+    	mkdir -p /storage/work
+    	mkdir -p /gpfs/scratch
+    	mkdir -p /gpfs/group
+	mkdir -p /var/spool/torque
+
+	pip install https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-16.04/wxPython-4.0.3-cp35-cp35m-linux_x86_64.whl
+
+	pip install imageio
+	#python -c "import imageio; imageio.plugins.ffmpeg.download()"
+	apt-get update -y
+	apt-get -y install ffmpeg libgtk-3-dev build-essential python3-tk
+	pip install imageio-ffmpeg
+	pip install easydict tables sk-video requests moviepy tqdm pandas ipywidgets seaborn scikit-image
+
+	pip install deeplabcut
+
+
+
+
+
+
+
+
+
+
+
+
